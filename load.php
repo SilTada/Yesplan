@@ -2,5 +2,5 @@
 
 require_once "Lib/Client.php";
 require_once "Lib/Request.php";
-foreach(glob("Lib/Endpoints/*.php") as $filename)
+foreach(glob(realpath(__DIR__)."/Lib/Endpoints/*.php") as $filename)
     require_once $filename;
