@@ -1,0 +1,126 @@
+<?php
+
+namespace Yesplan;
+
+class Request {
+    
+    private $client;
+    private $method;
+    private $endpoint;
+    private $post_data;
+    private $query;
+    private $searchquery;
+    
+    public function __construct($client, $method, $endpoint, $post_data = null, $query = null, $searchquery = null, $notify_at = null, $url = null) {
+        $this->client = $client;
+        $this->method = $method;
+        $this->endpoint = $endpoint;
+        $this->post_data = $post_data;
+        $this->query = $query;
+        $this->searchquery = $searchquery;
+        $this->notify_at = $notify_at;
+        $this->url = $url;
+    }
+    
+    public function run() {
+        $url = $this->generateUrl();
+        if($this->client->showUrl)
+            echo $url.'<br>';
+        
+        if($this->method == 'GET') {
+            $ch = curl_init($url);
+            curl_setopt_array(
+                $ch, 
+                array(
+                    CURLOPT_RETURNTRANSFER => TRUE
+                )
+            );
+        } else if($this->method == 'POST') {
+            $ch = curl_init($url);
+            curl_setopt_array(
+                $ch, 
+                array(
+                    CURLOPT_POST => TRUE,
+                    CURLOPT_RETURNTRANSFER => TRUE,
+                    CURLOPT_HTTPHEADER => array(
+                        'Content-Type: application/json',
+                        'X-Notify-At: '.$this->notify_at,
+                    ),
+                    CURLOPT_POSTFIELDS => json_encode($this->post_data)
+                )
+            );
+        } else if($this->method == 'PUT') {
+            $ch = curl_init($url);
+            curl_setopt_array(
+                $ch, 
+                array(
+                    CURLOPT_RETURNTRANSFER => TRUE,
+                    CURLOPT_CUSTOMREQUEST => "PUT",
+                    CURLOPT_HEADER => TRUE,
+                    CURLOPT_HTTPHEADER => array(
+                        'Content-Type: application/json',
+                    ),
+                    CURLOPT_POSTFIELDS => json_encode($this->post_data)
+                )
+            );
+        }
+        $response = curl_exec($ch);
+        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        if($response === FALSE){
+            die(curl_error($ch));
+        }
+        $response_data = json_decode($response);
+        if($httpcode == 401) {
+            $response_data = (object)[
+                'response_code' => 401,
+                'message' => 'Unauthorized'
+            ];
+        }
+        if($httpcode == 204) {
+            $response_data = (object)[
+                'response_code' => 204,
+                'message' => 'No Content'
+            ];
+        }
+        return $response_data;       
+        
+    }
+    
+    private function generateUrl() {
+        if($this->url) {
+            $url = $this->url;
+            if(substr_count($url, '?') >= 1) {
+                $url .= '&';
+            } else {
+                $url .= '?';
+            }
+            $url .= 'api_key='.$this->client->api_key;
+        } else {
+            $url = $this->client->server . "/api/" . $this->endpoint;
+            if($this->searchquery)
+                $url .= '/'.urlencode($this->searchquery);
+            if($this->query)
+                $url .= '/?'.$this->query;
+            $url_query = parse_url($url, PHP_URL_QUERY);
+            if($url_query) {
+                $url .= '&';
+            } else {
+                $url .= '?';
+            }
+            $url .= 'api_key='.$this->client->api_key;
+        }
+        return $url;        
+    }
+    
+    private function check($url) {
+        $headers = get_headers($url);
+        $code = substr($headers[0], 9, 3);
+        $code = trim($code);
+        if($code == 200) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+}
