@@ -6,7 +6,7 @@ load.php will perform a require_once for all necessary files in the lib-folder.
 
 ## Create a client object
 
-$client = new Yesplan\Client(YESPLAN_DOMAIN, YESPLAN_API_KEY);
+    $client = new Yesplan\Client(YESPLAN_DOMAIN, YESPLAN_API_KEY);
 
 Where YESPLAN_DOMAIN should be your Yespan domain, without http:// and trailing .yesplan.be. If your domain is http://rockit.yesplan.be, **rockit** should be your domain.
 
@@ -18,4 +18,4 @@ For getting data we're using the same methot for all edpoints. Note: not all ava
 
 ### Examples
 
-$data = Yesplan\Endpoints\Url::get($client, $full_request_url_without_api_key);
+    $data = Yesplan\Endpoints\Url::get($client, $full_request_url_without_api_key);
