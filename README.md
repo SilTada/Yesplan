@@ -56,7 +56,15 @@ Get custom data from an event.
 
 Where $keywords can either be an array or a list of komma separated Yesplan keywords.
 
+#### customdataByKey
+
+Creates a new object with given custom data object where data is sorted by keyword. This way it's easier to get custom data values.
+
+    Yesplan\Endpoints\Events::customdataByKey($customdata);
+    
 ##### Output example
+
+**getCustomdata** will output somthing like this:
 
     Array
     (
@@ -78,15 +86,7 @@ Where $keywords can either be an array or a list of komma separated Yesplan keyw
 
     )
 
-#### customdataByKey
-
-Creates a new object with given custom data object where data is sorted by keyword. This way it's easier to get custom data values.
-
-    Yesplan\Endpoints\Events::customdataByKey($customdata);
-    
-##### Output example
-
-Same data as example above.
+After running this through the **customdataByKey** function you'll get something like this.
 
     stdClass Object
     (
