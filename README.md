@@ -120,21 +120,67 @@ Where **$data** should be formatted like this:
         'value' => 'VALUE'
     ];
     
-    Array
-    (
-        [0] => stdClass Object
-            (
-                [keyword] => YESPLAN_KEYWORD_1
-                [value] => VALUE_1
-            )
-            
-        [1] => stdClass Object
-            (
-                [keyword] => YESPLAN_KEYWORD_2
-                [value] => VALUE_2
-            )
+### Profiles
 
-    )
+#### getList
+
+This function will give a list of profiles for a given [Yesplan search query](https://manual.yesplan.be/en/query-language/).
+
+    Yesplan\Endpoints\Profiles::getList($client, $searchquery);
+
+#### get
+
+Get all data of a profile.
+
+    Yesplan\Endpoints\Profiles::get($client, $profile_id);
+    
+### Statuses
+
+#### getList
+
+This function will give a list of statuses for a given [Yesplan search query](https://manual.yesplan.be/en/query-language/).
+
+    Yesplan\Endpoints\Statuses::getList($client, $searchquery);
+
+#### get
+
+Get all data of a status.
+
+    Yesplan\Endpoints\Statuses::get($client, $status_id);
+    
+### Locations
+
+#### getList
+
+This function will give a list of locations for a given [Yesplan search query](https://manual.yesplan.be/en/query-language/).
+
+    Yesplan\Endpoints\Locations::getList($client, $searchquery);
+
+#### get
+
+Get all data of a location.
+
+    Yesplan\Endpoints\Locations::get($client, $location_id);
+
+#### getCustomdata
+
+Get custom data from an event.
+
+    Yesplan\Endpoints\Locations::getCustomdata($client, $location_id, $keywords);
+
+Where $keywords can either be an array or a list of komma separated Yesplan keywords.
+
+#### customdataByKey
+
+Creates a new object with given custom data object where data is sorted by keyword. This way it's easier to get custom data values.
+
+    Yesplan\Endpoints\Locations::customdataByKey($customdata);
+
+
+
+
+
+
 
 
 
