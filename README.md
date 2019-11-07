@@ -34,25 +34,25 @@ This function will give a list of events for a given [Yesplan search query](http
 
 Get all data from an event.
 
-    Yesplan\Endpoints\Events::get($client, $id);
+    Yesplan\Endpoints\Events::get($client, $event_id);
 
 #### getSchedule
 
 Get schedule data from an event.
 
-    Yesplan\Endpoints\Events::getSchedule($client, $id);
+    Yesplan\Endpoints\Events::getSchedule($client, $event_id);
 
 #### getAttachments
 
 Get all attachments from an event.
 
-    Yesplan\Endpoints\Events::getAttachments($client, $id);
+    Yesplan\Endpoints\Events::getAttachments($client, $event_id);
 
 #### getCustomdata
 
 Get custom data from an event.
 
-    Yesplan\Endpoints\Events::getCustomdata($client, $id, $keywords);
+    Yesplan\Endpoints\Events::getCustomdata($client, $event_id, $keywords);
 
 Where $keywords can either be an array or a list of komma separated Yesplan keywords.
 
@@ -94,10 +94,47 @@ After running this through the **customdataByKey** function you'll get something
         [production_performer] => Axelle Red
     )
 
+#### getResourcebookings
+
+Get all resoursebookings from an event.
+
+    Yesplan\Endpoints\Events::getResourcebookings($client, $event_id);
 
 
+#### filterResourcesbookings
 
+Filters resoursebookings by type. Second parameter is optional, default type is "human".
 
+    Yesplan\Endpoints\Events::filterResourcesbookings($resourcebookings, $resource_type);
+
+#### putCustomdata
+
+Writes custom data into Yesplan.
+
+    Yesplan\Endpoints\Events::putCustomdata($client, $event_id, $data);
+
+Where **$data** should be formatted like this:
+
+    $data[] = (object) [
+        'keyword' => 'YESPLAN_KEYWORD',
+        'value' => 'VALUE'
+    ];
+    
+    Array
+    (
+        [0] => stdClass Object
+            (
+                [keyword] => YESPLAN_KEYWORD_1
+                [value] => VALUE_1
+            )
+            
+        [1] => stdClass Object
+            (
+                [keyword] => YESPLAN_KEYWORD_2
+                [value] => VALUE_2
+            )
+
+    )
 
 
 
