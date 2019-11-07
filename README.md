@@ -136,7 +136,7 @@ Where $keywords can either be an array or a list of komma separated Yesplan keyw
 
 Creates a new object with given custom data object where data is sorted by keyword. This way it's easier to get custom data values.
 
-    Yesplan\Endpoints\Events::customdataByKey($customdata);
+    Yesplan\Filter::customdataByKey($customdata);
     
 ##### Output example
 
@@ -174,7 +174,7 @@ After running this through the **customdataByKey** function you'll get something
 
 Filters resoursebookings by type. Second parameter is optional, default type is "human".
 
-    Yesplan\Endpoints\Events::filterResourcesbookings($resourcebookings, $resource_type);
+    Yesplan\Filter::resourcebookingsByType($resourcebookings, $resource_type);
 
 
 
@@ -190,4 +190,4 @@ Filters resoursebookings by type. Second parameter is optional, default type is 
 
 
 
-To be continued...
+***To be continued...***
