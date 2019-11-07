@@ -16,15 +16,34 @@ class Locations {
         return $result;
     }
     
-    public static function getCustomdata($client, $id, $query = null) {
-        $request = $client->newRequest('GET', "location/$id/customdata", $query);
-        $result = $request->run();
-        if(empty($query)) {
-            $data = $result->groups;
-        } else {
-            $data = $result->items;
+    public static function getCustomdata($client, $id, $keywords) {
+        $query = "keywords=";
+        if(is_string($keywords)) {
+            if(substr($keywords, 0, 9) === $query) {
+                $query = $keywords;
+            } else {
+                $query .= $keywords;
+            }
+        } else if(is_array($keywords)) {
+            $query .= implode(',', $keywords);
         }
-        return $data;
+        $request = $client->newRequest('GET', "location/$id/customdata", null, $query);
+        $result = $request->run();
+        if(empty($keywords)) {
+            if(property_exists($result, 'groups') && !empty($result->groups))
+                $data = $result->groups;
+        } else {
+            if(property_exists($result, 'items') && !empty($result->items))
+                $data = $result->items;
+        }
+        if(isset($data)) {
+            return $data;
+        } else {
+            return $data = (object) [
+                'error' => true,
+                'message' => 'No data.'
+            ];
+        }
     }
     
     public static function customdataByKey($custom_data) {
@@ -32,10 +51,12 @@ class Locations {
         foreach($custom_data as $item) {
             if(property_exists($item, 'children')) {
                 foreach($item->children as $subitem) {
-                    $data->{$subitem->keyword} = $subitem->value;
+                    if(!empty($subitem->value))
+                        $data->{$subitem->keyword} = $subitem->value;
                 }
             } else {
-                $data->{$item->keyword} = $item->value;
+                if(!empty($item->value))
+                    $data->{$item->keyword} = $item->value;
             }
         }
         return $data;
