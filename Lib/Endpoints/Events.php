@@ -28,15 +28,33 @@ class Events {
         return $result;
     }
     
-    public static function getCustomdata($client, $id, $query) {
+    public static function getCustomdata($client, $id, $keywords) {
+        $query = "keywords=";
+        if(is_string($keywords)) {
+            if(substr($keywords, 0, 9) === $query) {
+                $query = $keywords;
+            } else {
+                $query .= $keywords;
+            }
+        } else if(is_array($keywords)) {
+            $query .= implode(',', $keywords);
+        }
         $request = $client->newRequest('GET', "event/$id/customdata", null, $query);
         $result = $request->run();
-        if(empty($query)) {
+        if(empty($keywords)) {
             $data = $result->groups;
         } else {
-            $data = $result->items;
+            if(property_exists($result, 'items') && !empty($result->items))
+                $data = $result->items;
         }
-        return $data;
+        if(isset($data)) {
+            return $data;
+        } else {
+            return $data = (object) [
+                'error' => true,
+                'message' => 'No data.'
+            ];
+        }
     }
     
     public static function customdataByKey($custom_data) {
