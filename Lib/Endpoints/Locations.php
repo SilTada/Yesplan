@@ -46,20 +46,4 @@ class Locations {
         }
     }
     
-    public static function customdataByKey($custom_data) {
-        $data = new \stdClass();
-        foreach($custom_data as $item) {
-            if(property_exists($item, 'children')) {
-                foreach($item->children as $subitem) {
-                    if(!empty($subitem->value))
-                        $data->{$subitem->keyword} = $subitem->value;
-                }
-            } else {
-                if(!empty($item->value))
-                    $data->{$item->keyword} = $item->value;
-            }
-        }
-        return $data;
-    }
-    
 }

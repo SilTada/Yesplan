@@ -56,43 +56,6 @@ Get custom data from an event.
 
 Where $keywords can either be an array or a list of komma separated Yesplan keywords.
 
-#### customdataByKey
-
-Creates a new object with given custom data object where data is sorted by keyword. This way it's easier to get custom data values.
-
-    Yesplan\Endpoints\Events::customdataByKey($customdata);
-    
-##### Output example
-
-**getCustomdata** will output somthing like this:
-
-    Array
-    (
-        [0] => stdClass Object
-            (
-                [name] => Titel
-                [keyword] => production_title
-                [type] => String
-                [value] => Exil
-            )
-
-        [1] => stdClass Object
-            (
-                [name] => Uitvoerder
-                [keyword] => production_performer
-                [type] => String
-                [value] => Axelle Red
-            )
-
-    )
-
-After running this through the **customdataByKey** function you'll get something like this.
-
-    stdClass Object
-    (
-        [production_title] => Exil
-        [production_performer] => Axelle Red
-    )
 
 #### getResourcebookings
 
@@ -100,12 +63,6 @@ Get all resoursebookings from an event.
 
     Yesplan\Endpoints\Events::getResourcebookings($client, $event_id);
 
-
-#### filterResourcesbookings
-
-Filters resoursebookings by type. Second parameter is optional, default type is "human".
-
-    Yesplan\Endpoints\Events::filterResourcesbookings($resourcebookings, $resource_type);
 
 #### putCustomdata
 
@@ -170,19 +127,54 @@ Get custom data from an event.
 
 Where $keywords can either be an array or a list of komma separated Yesplan keywords.
 
+
+
+
+## Filter
+
 #### customdataByKey
 
 Creates a new object with given custom data object where data is sorted by keyword. This way it's easier to get custom data values.
 
-    Yesplan\Endpoints\Locations::customdataByKey($customdata);
+    Yesplan\Endpoints\Events::customdataByKey($customdata);
+    
+##### Output example
 
+**getCustomdata** will output somthing like this:
 
+    Array
+    (
+        [0] => stdClass Object
+            (
+                [name] => Titel
+                [keyword] => production_title
+                [type] => String
+                [value] => Exil
+            )
 
+        [1] => stdClass Object
+            (
+                [name] => Uitvoerder
+                [keyword] => production_performer
+                [type] => String
+                [value] => Axelle Red
+            )
 
+    )
 
+After running this through the **customdataByKey** function you'll get something like this.
 
+    stdClass Object
+    (
+        [production_title] => Exil
+        [production_performer] => Axelle Red
+    )
 
+#### resourcebookingsByType
 
+Filters resoursebookings by type. Second parameter is optional, default type is "human".
+
+    Yesplan\Endpoints\Events::filterResourcesbookings($resourcebookings, $resource_type);
 
 
 
