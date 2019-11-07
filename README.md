@@ -20,7 +20,7 @@ For getting data we're using the same method for all edpoints. Note: not all ava
 
 ### Url
 
-    $data = Yesplan\Endpoints\Url::get($client, $full_request_url_without_api_key);
+    Yesplan\Endpoints\Url::get($client, $full_request_url_without_api_key);
 
 ### Events 
 
@@ -28,13 +28,41 @@ For getting data we're using the same method for all edpoints. Note: not all ava
 
 This function will give a list of events for a given [Yesplan search query](https://manual.yesplan.be/en/query-language/).
 
-    $data = Yesplan\Endpoints\Data::getList($client, $searchquery);
+    Yesplan\Endpoints\Events::getList($client, $searchquery);
 
 #### get
 
 Get all data from an event.
 
-    $data = Yesplan\Endpoints\Data::get($client, $id);
+    Yesplan\Endpoints\Events::get($client, $id);
+
+#### getSchedule
+
+Get schedule data from an event.
+
+    Yesplan\Endpoints\Events::getSchedule($client, $id);
+
+#### getAttachments
+
+Get all attachments from an event.
+
+    Yesplan\Endpoints\Events::getAttachments($client, $id);
+
+#### getCustomdata
+
+Get custom data from an event.
+
+    Yesplan\Endpoints\Events::getCustomdata($client, $id, $keywords);
+
+Where $keywords can either be an array or a list of komma separated Yesplan keywords.
+
+
+
+
+
+
+
+
 
 
 To be continued...
