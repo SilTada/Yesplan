@@ -24,6 +24,8 @@ For getting data we're using the same method for all edpoints. Note: not all ava
 
 #### getList
 
+This function will give a list of events for a given [Yesplan search query](https://manual.yesplan.be/en/query-language/).
+
     $data = Yesplan\Endpoints\Data::getList($client, $searchquery);
 
 To be continued...
