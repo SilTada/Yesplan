@@ -21,8 +21,14 @@ For getting data we're using the same method for all edpoints. Note: not all ava
 ### Url
 
     Yesplan\Endpoints\Url::get($client, $full_request_url_without_api_key);
+    
+### Dataviews
+
+...
 
 ### Events 
+
+For directly getting data from events.
 
 #### getList
 
@@ -127,7 +133,19 @@ Get custom data from an event.
 
 Where $keywords can either be an array or a list of komma separated Yesplan keywords.
 
+### Tasks
 
+#### getList
+
+This function will give a list of locations for a given [Yesplan search query](https://manual.yesplan.be/en/query-language/).
+
+    Yesplan\Endpoints\Tasks::getList($client, $searchquery);
+
+#### get
+
+Get all data of a task.
+
+    Yesplan\Endpoints\Tasks::get($client, $location_id);
 
 
 ## Filter
