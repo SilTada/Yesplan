@@ -56,6 +56,56 @@ Get custom data from an event.
 
 Where $keywords can either be an array or a list of komma separated Yesplan keywords.
 
+##### Output example
+
+    Array
+    (
+        [0] => stdClass Object
+            (
+                [name] => Titel
+                [keyword] => production_title
+                [type] => String
+                [value] => Exil
+            )
+
+        [1] => stdClass Object
+            (
+                [name] => Uitvoerder
+                [keyword] => production_performer
+                [type] => String
+                [value] => Axelle Red
+            )
+
+    )
+
+#### customdataByKey
+
+Creates a new object with given custom data object where data is sorted by keyword. This way it's easier to get custom data values.
+
+    Yesplan\Endpoints\Events::customdataByKey($customdata);
+    
+##### Output example
+
+Same data as example above.
+
+    stdClass Object
+    (
+        [production_title] => Exil
+        [production_performer] => Axelle Red
+    )
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
