@@ -42,7 +42,8 @@ class Events {
         $request = $client->newRequest('GET', "event/$id/customdata", null, $query);
         $result = $request->run();
         if(empty($keywords)) {
-            $data = $result->groups;
+            if(property_exists($result, 'groups') && !empty($result->groups))
+                $data = $result->groups;
         } else {
             if(property_exists($result, 'items') && !empty($result->items))
                 $data = $result->items;
