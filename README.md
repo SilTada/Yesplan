@@ -20,5 +20,10 @@ For getting data we're using the same method for all edpoints. Note: not all ava
 
     $data = Yesplan\Endpoints\Url::get($client, $full_request_url_without_api_key);
 
+### Events 
+
+#### getList
+
+    $data = Yesplan\Endpoints\Data::getList($client, $searchquery);
 
 To be continued...
