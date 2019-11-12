@@ -28,7 +28,7 @@ If you'd like to use an endpoint which is nog included, you can use the Url endp
     
 ### Dataviews
 
-Generating data from a dataview and retreiving the data.
+Generation a data result from a dataview and retreiving the data.
 https://manual.yesplan.be/nl/developers/dataviews/
 
 #### compute
@@ -117,7 +117,7 @@ Get custom data from an event.
 
     Yesplan\Endpoints\Events::getCustomdata($client, $event_id, $keywords);
 
-Where $keywords can either be an array or a list of komma separated Yesplan keywords.
+Where **$keywords** can either be an array or a list of komma separated Yesplan keywords.
 
 
 #### getResourcebookings
@@ -250,19 +250,11 @@ After running this through the **customdataByKey** function you'll get something
 Filters resoursebookings by type. Second parameter is optional, default type is "human".
 
     Yesplan\Filter::resourcebookingsByType($resourcebookings, $resource_type);
+    
+## Contact
 
+Writte by Sil Verdickt.
 
+Feel free to contact me if needed.
 
-
-
-
-
-
-
-
-
-
-
-
-
-***To be continued...***
+www.tada.be
