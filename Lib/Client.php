@@ -11,7 +11,7 @@ class Client {
     public function __construct($clientname, $api_key, $showUrl = false) {
         $this->server = "https://$clientname.yesplan.be";
         $this->api_key = $api_key;
-        $this->showUrl = $showUrl;        
+        $this->showUrl = $showUrl;
     }
     
     public function newRequest($method, $endpoint, $post_data = null, $query = null, $searchquery = null, $notify_at = null) {

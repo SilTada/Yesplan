@@ -75,12 +75,14 @@ class Request {
                 'response_code' => 401,
                 'message' => 'Unauthorized'
             ];
+            die("API error: 401 Unauthorized");
         }
         if($httpcode == 204) {
             $response_data = (object)[
                 'response_code' => 204,
                 'message' => 'No Content'
             ];
+            die("API error: 204 No Content");
         }
         return $response_data;       
         
@@ -110,17 +112,6 @@ class Request {
             $url .= 'api_key='.$this->client->api_key;
         }
         return $url;        
-    }
-    
-    private function check($url) {
-        $headers = get_headers($url);
-        $code = substr($headers[0], 9, 3);
-        $code = trim($code);
-        if($code == 200) {
-            return true;
-        } else {
-            return false;
-        }
     }
     
 }
