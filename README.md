@@ -33,7 +33,8 @@ Give a command to collect data.
 
     Yesplan\Endpoints\Dataviews::compute($client, $dataview_id, $parameters, $callback_url);
     
-$dataview_id: the id of the dataview you'd like to use.
+$dataview_id: the ID of the dataview you'd like to use.
+
 $parameters: should be an array like this:
     
     Array
@@ -44,7 +45,39 @@ $parameters: should be an array like this:
 $callback_url: is the full URL Yesplan will use to notify when the data is collected and ready to be retreived.
 
 This function will return a JSON response with the current status of the dataview. This status should be **running**.
-When the data is collected, Yesplan wil send a POST request to the given callback URL.
+When the data is collected, Yesplan wil send a POST request to the given callback URL. This request will contain the dataview ID and the full API URL to retreive the data. This will look something like this:
+
+    POST /yesplan-dataview-result-ready/123 HTTP/1.1
+    Host: ticketing.system.com
+    Accept: */*
+    Content-type: application/json
+    Content-Length: 189
+
+    {
+        "id": "335990017",
+        "url": "https://theater.yesplan.be/api/dataviewresult/289503489-1510822734/json/335990017",
+        "creationtime": "2017-12-06T09:18:32.48699498176575+01:00"
+    }
+    
+#### status
+
+Get the status of a dataview request.
+
+    Yesplan\Endpoints\Dataviews::status($client, $dataview_id, $result_id);
+    
+This function was made for testing. In normal situations you'll not need this one.
+
+#### get
+
+Get the collected data from a dataview request.
+
+    Yesplan\Endpoints\Dataviews::get($client, $dataview_id, $result_id);
+
+This function is the one you'll need in your callback file. The post data of Yesplan will contain the result ID. However, you still need the dataview ID.
+
+In the case you don't want to specify the dataview ID again in the callback file, you can simply use the Url function.
+
+    Yesplan\Endpoints\Url::get($client, POST_DATA->url);
 
 ### Events 
 
