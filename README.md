@@ -253,7 +253,7 @@ Filters resoursebookings by type. Second parameter is optional, default type is 
     
 ## Contact
 
-Writte by Sil Verdickt.
+Written by Sil Verdickt.
 
 Feel free to contact me if needed.
 
