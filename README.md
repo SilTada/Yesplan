@@ -25,16 +25,12 @@ For getting data we're using the same method for all edpoints. Note: not all ava
 ### Dataviews
 
 Generating data from a dataview and retreiving the data.
-[https://manual.yesplan.be/nl/developers/dataviews/]
+https://manual.yesplan.be/nl/developers/dataviews/
 
 #### compute
 
 Give a command to collect data.
 
-### Events 
-
-For directly getting data from events.
-    
     Yesplan\Endpoints\Dataviews::compute($client, $dataview_id, $parameters, $callback_url);
     
 $dataview_id: the id of the dataview you'd like to use.
@@ -49,6 +45,10 @@ $callback_url: is the full URL Yesplan will use to notify when the data is colle
 
 This function will return a JSON response with the current status of the dataview. This status should be **running**.
 When the data is collected, Yesplan wil send a POST request to the given callback URL.
+
+### Events 
+
+For directly getting data from events.
 
 #### getList
 
