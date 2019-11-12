@@ -37,16 +37,16 @@ Give a command to collect data.
 
     Yesplan\Endpoints\Dataviews::compute($client, $dataview_id, $parameters, $callback_url);
     
-$dataview_id: the ID of the dataview you'd like to use.
+**$dataview_id*: the ID of the dataview you'd like to use.
 
-$parameters: should be an array like this:
+**$parameters**: should be an array like this:
     
     Array
     (
         [filter_keyword] => filter_value
     )
     
-$callback_url: is the full URL Yesplan will use to notify when the data is collected and ready to be retreived.
+**$callback_url**: is the full URL Yesplan will use to notify when the data is collected and ready to be retreived.
 
 This function will return a JSON response with the current status of the dataview. This status should be **running**.
 When the data is collected, Yesplan wil send a POST request to the given callback URL. This request will contain the dataview ID and the full API URL to retreive the data. This will look something like this:
