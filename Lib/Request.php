@@ -75,14 +75,14 @@ class Request {
                 'response_code' => 401,
                 'message' => 'Unauthorized'
             ];
-            die("API error: 401 Unauthorized");
+            //die("API error: 401 Unauthorized");
         }
         if($httpcode == 204) {
             $response_data = (object)[
                 'response_code' => 204,
                 'message' => 'No Content'
             ];
-            die("API error: 204 No Content");
+            //die("API error: 204 No Content");
         }
         return $response_data;       
         
