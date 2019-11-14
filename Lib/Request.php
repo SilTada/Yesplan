@@ -101,15 +101,12 @@ class Request {
             $url = $this->client->server . "/api/" . $this->endpoint;
             if($this->searchquery)
                 $url .= '/'.urlencode($this->searchquery);
+            $glue = '&';
+            if(!parse_url($url, PHP_URL_QUERY))
+                $glue = '?';
             if($this->query)
-                $url .= '/?'.$this->query;
-            $url_query = parse_url($url, PHP_URL_QUERY);
-            if($url_query) {
-                $url .= '&';
-            } else {
-                $url .= '?';
-            }
-            $url .= 'api_key='.$this->client->api_key;
+                $url .= $glue.$this->query;
+            $url .= $glue.'api_key='.$this->client->api_key;
         }
         return $url;        
     }
