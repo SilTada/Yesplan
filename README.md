@@ -115,9 +115,11 @@ Get all attachments from an event.
 
 Get custom data from an event.
 
-    Yesplan\Endpoints\Events::getCustomdata($client, $event_id, $keywords);
+    Yesplan\Endpoints\Events::getCustomdata($client, $event_id, $keywords, $valuesonly);
 
 Where **$keywords** can either be an array or a list of komma separated Yesplan keywords.
+
+**$valuesonly** is optional and by default false. Set this parameter as true to get all custom data.
 
 
 #### getResourcebookings

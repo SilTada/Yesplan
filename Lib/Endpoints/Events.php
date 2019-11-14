@@ -30,26 +30,33 @@ class Events {
         return $result;
     }
     
-    public static function getCustomdata($client, $id, $keywords) {
-        $query = "keywords=";
-        if(is_string($keywords)) {
-            if(substr($keywords, 0, 9) === $query) {
-                $query = $keywords;
-            } else {
-                $query .= $keywords;
+    public static function getCustomdata($client, $id, $keywords, $valuesonly = false) {
+        $endpoint = 'event/'.$id.'/customdata';
+        if($valuesonly) {
+            $endpoint .= '/?valuesonly'; 
+            $query = null;
+        } else {
+            $query = "keywords=";
+            if(is_string($keywords)) {
+                if(substr($keywords, 0, 9) === $query) {
+                    $query = $keywords;
+                } else {
+                    $query .= $keywords;
+                }
+            } else if(is_array($keywords)) {
+                $query .= implode(',', $keywords);
             }
-        } else if(is_array($keywords)) {
-            $query .= implode(',', $keywords);
         }
-        $request = $client->newRequest('GET', "event/$id/customdata", null, $query);
+        $request = $client->newRequest('GET', $endpoint, null, $query);
         $result = $request->run();
-        if(empty($keywords)) {
+        if(property_exists($result, 'items') && !empty($result->items)) 
+            $data = $result->items;
+            if(!$valuesonly)
+                $data = \Yesplan\Filter::customdataByKey($result->items);
+        if(empty($keywords))
             if(property_exists($result, 'groups') && !empty($result->groups))
                 $data = $result->groups;
-        } else {
-            if(property_exists($result, 'items') && !empty($result->items))
-                $data = $result->items;
-        }
+        
         if(isset($data)) {
             return $data;
         } else {

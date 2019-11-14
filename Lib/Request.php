@@ -72,17 +72,19 @@ class Request {
         $response_data = json_decode($response);
         if($httpcode == 401) {
             $response_data = (object)[
+                'error' => true,
                 'response_code' => 401,
                 'message' => 'Unauthorized'
             ];
-            die("API error: 401 Unauthorized");
+            //die("API error: 401 Unauthorized");
         }
         if($httpcode == 204) {
             $response_data = (object)[
+                'error' => true,
                 'response_code' => 204,
                 'message' => 'No Content'
             ];
-            die("API error: 204 No Content");
+            //die("API error: 204 No Content");
         }
         return $response_data;       
         
@@ -91,26 +93,20 @@ class Request {
     private function generateUrl() {
         if($this->url) {
             $url = $this->url;
-            if(substr_count($url, '?') >= 1) {
-                $url .= '&';
-            } else {
-                $url .= '?';
-            }
-            $url .= 'api_key='.$this->client->api_key;
         } else {
             $url = $this->client->server . "/api/" . $this->endpoint;
-            if($this->searchquery)
-                $url .= '/'.urlencode($this->searchquery);
-            if($this->query)
-                $url .= '/?'.$this->query;
-            $url_query = parse_url($url, PHP_URL_QUERY);
-            if($url_query) {
-                $url .= '&';
-            } else {
-                $url .= '?';
-            }
-            $url .= 'api_key='.$this->client->api_key;
         }
+        if($this->searchquery)
+            $url .= '/'.urlencode($this->searchquery);
+        $glue = '?';
+        if(parse_url($url, PHP_URL_QUERY))
+            $glue = '&';
+        if($this->query) {
+            $url .= $glue.$this->query;
+            $glue = '&';
+        }
+        $url .= $glue.'api_key='.$this->client->api_key;
+        
         return $url;        
     }
     
