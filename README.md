@@ -119,8 +119,9 @@ Get custom data from an event.
 
 Where **$keywords** can either be an array or a list of komma separated Yesplan keywords.
 
-**$valuesonly** is optional and by default false. Set this parameter as true to get all custom data.
+#### getCustomdataValuesOnly
 
+Get all custom data from an event.
 
 #### getResourcebookings
 
