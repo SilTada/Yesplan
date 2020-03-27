@@ -123,7 +123,7 @@ Where **$keywords** can either be an array or a list of komma separated Yesplan 
 
 Get all custom data from an event.
 
-    Yesplan\Endpoints\Events::getCustomdata($client, $event_id);
+    Yesplan\Endpoints\Events::getCustomdataValuesOnly($client, $event_id);
 
 
 #### getResourcebookings
