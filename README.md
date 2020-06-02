@@ -196,6 +196,12 @@ Get custom data from an event.
 
 Where $keywords can either be an array or a list of komma separated Yesplan keywords.
 
+#### getCustomdataValuesOnly
+
+Get all custom data from a location.
+
+    Yesplan\Endpoints\Locations::getCustomdataValuesOnly($client, $location_id);
+
 ### Tasks
 
 #### getList

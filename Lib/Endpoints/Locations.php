@@ -46,4 +46,21 @@ class Locations {
         }
     }
     
+    public static function getCustomdataValuesOnly($client, $id) {
+        $endpoint = 'location/'.$id.'/customdata?valuesonly';
+        $request = $client->newRequest('GET', $endpoint, null, null);
+        $result = $request->run();
+        if(property_exists($result, 'items') && !empty($result->items)) 
+            $data = $result->items;
+        
+        if(isset($data)) {
+            return $data;
+        } else {
+            return $data = (object) [
+                'error' => true,
+                'message' => 'No data.'
+            ];
+        }
+    }
+    
 }
