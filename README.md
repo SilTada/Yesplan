@@ -145,6 +145,72 @@ Where **$data** should be formatted like this:
         'keyword' => 'YESPLAN_KEYWORD',
         'value' => 'VALUE'
     ];
+    ### Events 
+
+For directly getting data from events.
+
+### Groups
+
+#### getList
+
+This function will give a list of groups for a given [Yesplan search query](https://manual.yesplan.be/en/query-language/).
+
+    Yesplan\Endpoints\Groups::getList($client, $searchquery);
+
+This is not tested yet.
+
+#### get
+
+Get all data from a group.
+
+    Yesplan\Endpoints\Groups::get($client, $group_id);
+
+#### getSchedule
+
+Get schedule data from a group.
+
+    Yesplan\Endpoints\Groups::getSchedule($client, $group_id);
+
+#### getAttachments
+
+Get all attachments from a group.
+
+    Yesplan\Endpoints\Groups::getAttachments($client, $group_id);
+
+#### getCustomdata
+
+Get custom data from a group.
+
+    Yesplan\Endpoints\Groups::getCustomdata($client, $group_id, $keywords);
+
+Where **$keywords** can either be an array or a list of komma separated Yesplan keywords.
+
+#### getCustomdataValuesOnly
+
+Get all custom data from a group.
+
+    Yesplan\Endpoints\Groups::getCustomdataValuesOnly($client, $group_id);
+
+
+#### getResourcebookings
+
+Get all resoursebookings from a group.
+
+    Yesplan\Endpoints\Groups::getResourcebookings($client, $group_id);
+
+
+#### putCustomdata
+
+Writes custom data into Yesplan.
+
+    Yesplan\Endpoints\Groups::putCustomdata($client, $group_id, $data);
+
+Where **$data** should be formatted like this:
+
+    $data[] = (object) [
+        'keyword' => 'YESPLAN_KEYWORD',
+        'value' => 'VALUE'
+    ];
     
 ### Profiles
 

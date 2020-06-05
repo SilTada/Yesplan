@@ -25,7 +25,7 @@ class Request {
     public function run() {
         $url = $this->generateUrl();
         if($this->client->showUrl)
-            echo $url.'<br>';
+            trigger_error("Request url: $url");
         
         if($this->method == 'GET') {
             $ch = curl_init($url);
