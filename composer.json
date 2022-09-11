@@ -1,7 +1,7 @@
 {
     "name": "siltada/yesplan",
     "description": "Yesplan API / PHP Library",
-    "version" : "1.0.0",
+    "version" : "3.2.0",
     "type": "library",
     "authors": [
         {
@@ -9,7 +9,6 @@
             "email": "sil@tada.be"
         }
     ],
-    "minimum-stability": "dev",
     "autoload": {
         "files": ["load.php"]
     },
