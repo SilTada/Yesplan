@@ -9,7 +9,7 @@
             "email": "sil@tada.be"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "autoload": {
         "files": ["load.php"]
     },
