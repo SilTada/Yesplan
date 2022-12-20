@@ -10,6 +10,8 @@ class Request {
     private $post_data;
     private $query;
     private $searchquery;
+    private $notify_at;
+    private $url;
     
     public function __construct($client, $method, $endpoint, $post_data = null, $query = null, $searchquery = null, $notify_at = null, $url = null) {
         $this->client = $client;

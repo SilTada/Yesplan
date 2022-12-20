@@ -7,6 +7,8 @@ class Client {
     public $server;
     
     public $api_key;
+
+    public $showUrl;
     
     public function __construct($clientname, $api_key, $showUrl = false) {
         $this->server = "https://$clientname.yesplan.be";
